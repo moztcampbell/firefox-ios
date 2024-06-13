@@ -7,7 +7,7 @@ import Common
 
 struct TabPeekState: ScreenState, Equatable {
     let showAddToBookmarks: Bool
-    let showSendToDevice: Bool
+    let showShare: Bool
     let showCopyURL: Bool
     let showCloseTab: Bool
     let previewAccessibilityLabel: String
@@ -24,7 +24,7 @@ struct TabPeekState: ScreenState, Equatable {
 
         self.init(windowUUID: tabPeekState.windowUUID,
                   showAddToBookmarks: tabPeekState.showAddToBookmarks,
-                  showSendToDevice: tabPeekState.showSendToDevice,
+                  showShare: tabPeekState.showShare,
                   showCopyURL: tabPeekState.showCopyURL,
                   showCloseTab: tabPeekState.showCloseTab,
                   previewAccessibilityLabel: tabPeekState.previewAccessibilityLabel,
@@ -33,14 +33,14 @@ struct TabPeekState: ScreenState, Equatable {
 
     init(windowUUID: WindowUUID,
          showAddToBookmarks: Bool = false,
-         showSendToDevice: Bool = false,
+         showShare: Bool = false,
          showCopyURL: Bool = true,
          showCloseTab: Bool = true,
          previewAccessibilityLabel: String = "",
          screenshot: UIImage = UIImage()) {
         self.windowUUID = windowUUID
         self.showAddToBookmarks = showAddToBookmarks
-        self.showSendToDevice = showSendToDevice
+        self.showShare = showShare
         self.showCopyURL = showCopyURL
         self.showCloseTab = showCloseTab
         self.previewAccessibilityLabel = previewAccessibilityLabel
@@ -58,7 +58,7 @@ struct TabPeekState: ScreenState, Equatable {
             guard let tabPeekModel = action.tabPeekModel else { return state }
             return TabPeekState(windowUUID: state.windowUUID,
                                 showAddToBookmarks: tabPeekModel.canTabBeSaved,
-                                showSendToDevice: tabPeekModel.isSyncEnabled && tabPeekModel.canTabBeSaved,
+                                showShare: tabPeekModel.isSyncEnabled && tabPeekModel.canTabBeSaved,
                                 previewAccessibilityLabel: tabPeekModel.accessiblityLabel,
                                 screenshot: tabPeekModel.screenshot)
         default:

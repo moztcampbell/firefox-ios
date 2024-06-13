@@ -107,15 +107,15 @@ class TabPeekViewController: UIViewController,
                 return
             })
         }
-        if tabPeekState.showSendToDevice {
+        if tabPeekState.showShare {
             actions.append(UIAction(
-                title: .AppMenu.TouchActions.SendToDeviceTitle,
+                title: .ShareContextMenuTitle,
                 image: UIImage.templateImageNamed(StandardImageIdentifiers.Large.shareApple),
                 identifier: nil) { [weak self] _ in
                     guard let self else { return }
                     let action = TabPeekAction(tabUUID: self.tab.tabUUID,
                                                windowUUID: self.windowUUID,
-                                               actionType: TabPeekActionType.sendToDevice)
+                                               actionType: TabPeekActionType.share)
                     store.dispatch(action)
                     return
             })

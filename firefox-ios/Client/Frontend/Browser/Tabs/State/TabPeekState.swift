@@ -33,7 +33,7 @@ struct TabPeekState: ScreenState, Equatable {
 
     init(windowUUID: WindowUUID,
          showAddToBookmarks: Bool = false,
-         showShare: Bool = false,
+         showShare: Bool = true,
          showCopyURL: Bool = true,
          showCloseTab: Bool = true,
          previewAccessibilityLabel: String = "",
@@ -58,7 +58,6 @@ struct TabPeekState: ScreenState, Equatable {
             guard let tabPeekModel = action.tabPeekModel else { return state }
             return TabPeekState(windowUUID: state.windowUUID,
                                 showAddToBookmarks: tabPeekModel.canTabBeSaved,
-                                showShare: tabPeekModel.isSyncEnabled && tabPeekModel.canTabBeSaved,
                                 previewAccessibilityLabel: tabPeekModel.accessiblityLabel,
                                 screenshot: tabPeekModel.screenshot)
         default:

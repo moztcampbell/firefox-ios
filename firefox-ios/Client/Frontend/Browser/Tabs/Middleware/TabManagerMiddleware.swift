@@ -413,6 +413,14 @@ class TabManagerMiddleware {
                                               windowUUID: uuid,
                                               actionType: TabPanelMiddlewareActionType.refreshTabs)
         store.dispatch(action)
+
+
+        guard
+            let selectedTab = tabManager.selectedTab,
+            let tab = tabManager.getTabForUUID(uuid: selectedTab.tabUUID) 
+        else { return }
+
+        tabManager.selectTab(tab)
     }
 
     // MARK: - Inactive tabs helper

@@ -652,7 +652,12 @@ class LegacyTabManager: NSObject, FeatureFlaggable, TabManager, TabEventHandler 
         storeChanges()
         backupCloseTabs = [Tab]()
         if backupCloseTab != nil {
-            selectTab(backupCloseTab?.tab)
+            let previouslySelectedTab = selectedTab
+            if let tabToSelect = previouslySelectedTab {
+                selectTab(tabToSelect)
+            } else {
+                selectTab(backupCloseTab?.tab)
+            }
             backupCloseTab = nil
         }
     }

@@ -30,6 +30,8 @@ class TabDisplayView: UIView,
     private var tabsSectionManager: TabsSectionManager
     private let windowUUID: WindowUUID
     private let animationQueue: TabTrayAnimationQueue
+    // TODO: Introduce diffable datasources to remove this hack, see https://mozilla-hub.atlassian.net/browse/FXIOS-9485
+    private var previousTabsCount: Int = 0
     var theme: Theme?
 
     private var shouldHideInactiveTabs: Bool {
@@ -104,7 +106,11 @@ class TabDisplayView: UIView,
     func newState(state: TabsPanelState) {
         tabsState = state
 
-        collectionView.reloadData()
+        let tabsCount = tabsState.tabs.count
+        if previousTabsCount != tabsCount {
+            collectionView.reloadData()
+            previousTabsCount = tabsCount
+        }
 
         if let index = state.scrollToIndex {
             scrollToTab(index)

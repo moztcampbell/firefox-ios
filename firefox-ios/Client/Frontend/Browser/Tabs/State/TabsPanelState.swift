@@ -15,7 +15,7 @@ struct TabsPanelState: ScreenState, Equatable {
     var windowUUID: WindowUUID
     var scrollToIndex: Int?
     var didTapAddTab: Bool
-    var urlRequest: URLRequest?
+    //var urlRequest: URLRequest?
 
     var isPrivateTabsEmpty: Bool {
         guard isPrivateMode else { return false }

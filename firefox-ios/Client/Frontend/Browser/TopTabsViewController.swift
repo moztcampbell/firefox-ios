@@ -146,6 +146,7 @@ class TopTabsViewController: UIViewController, Themeable, Notifiable {
 
     func refreshTabs() {
         topTabDisplayManager.refreshStore(evenIfHidden: true)
+        hideNewTabButtonIfNecessary()
     }
 
     deinit {
@@ -299,6 +300,15 @@ class TopTabsViewController: UIViewController, Themeable, Notifiable {
                 tabsButton.heightAnchor.constraint(equalTo: view.heightAnchor),
             ])
         }
+    }
+
+    private func hideNewTabButtonIfNecessary() {
+        // show new tab button when toolbar refactor is off or
+        // toolbar refactor is on and the selected tab is not a homepage
+        let isNotHomepage = tabManager.selectedTab?.isFxHomeTab == false
+        let isWebsiteWithNewToolbar = ToolbarFlagManager.isRefactorEnabled && isNotHomepage
+        let showNewTab = isWebsiteWithNewToolbar || !ToolbarFlagManager.isRefactorEnabled
+        newTab.isHidden = !showNewTab
     }
 
     private func handleFadeOutAfterTabSelection() {

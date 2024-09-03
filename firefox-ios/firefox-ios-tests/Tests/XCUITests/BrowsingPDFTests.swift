@@ -5,13 +5,23 @@
 import XCTest
 import Common
 
+//let PDF_website = [
+//    "url": "https://storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
+//    "pdfValue": "storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
+//    "urlValue": "yukon.ca/en/education-and-schools",
+//    "bookmarkLabel": "https://storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
+//    "longUrlValue": "http://www.education.gov.yk.ca/"
+//]
+ 
+
 let PDF_website = [
-    "url": "https://storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
-    "pdfValue": "storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
-    "urlValue": "yukon.ca/en/education-and-schools",
-    "bookmarkLabel": "https://storage.googleapis.com/mobile_test_assets/public/pdf-test.pdf",
-    "longUrlValue": "http://www.education.gov.yk.ca/"
+    "url": "https://storage.googleapis.com/mobile_test_assets/public/moz_pdf_test_file.pdf",
+    "pdfValue": "storage.googleapis.com/mobile_test_assets/public/moz_pdf_test_file.pdf",
+    "urlValue": "localhost:7777/test-fixture/test-pdf_moz.html",
+    "bookmarkLabel": "https://storage.googleapis.com/mobile_test_assets/public/moz_pdf_test_file.pdf",
+    "longUrlValue": "http://localhost:7777/test-fixture/test-pdf_moz.html"
 ]
+
 class BrowsingPDFTests: BaseTestCase {
     // https://mozilla.testrail.io/index.php?/cases/view/2307116
     func testOpenPDFViewer() {
@@ -115,9 +125,12 @@ class BrowsingPDFTests: BaseTestCase {
         navigator.openURL(PDF_website["url"]!)
         waitUntilPageLoad()
         navigator.performAction(Action.BookmarkThreeDots)
+        waitUntilPageLoad()
         navigator.goto(BrowserTabMenu)
         navigator.goto(LibraryPanel_Bookmarks)
         mozWaitForElementToExist(app.tables["Bookmarks List"])
         mozWaitForElementToExist(app.tables["Bookmarks List"].staticTexts[PDF_website["bookmarkLabel"]!])
     }
 }
+
+

@@ -39,7 +39,7 @@ features:
         description: >
            Configurable relay URL for production environment
         type: String
-        default: "https://mozilla-ohttp-fakespot.fastly-edge.com/"
+        default: "https://mozilla-ohttp.fastly-edge.com/"
     defaults:
       - channel: beta
         value:
